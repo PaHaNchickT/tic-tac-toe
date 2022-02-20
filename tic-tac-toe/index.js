@@ -13,7 +13,9 @@ const combo = [
 const bg = document.querySelector('.bg')
 const retry = document.querySelector('.retry')
 const again = document.querySelector('.again')
-const retryText = document.querySelector('.retry-placeholder')
+const h1 = document.querySelector('h1')
+const h2 = document.querySelector('h2')
+let counter = 0;
 
 area.addEventListener('click', e => {
     if (e.target.className == 'ceil free') {
@@ -22,10 +24,12 @@ area.addEventListener('click', e => {
             e.target.classList.remove('O')
             e.target.classList.add('X')
             symbol = 1
+            counter++
         } else {
             e.target.classList.add('O')
             e.target.classList.remove('X')
             symbol = 0
+            counter++
         }
     }
     play();
@@ -53,8 +57,6 @@ function play() {
             final('O')
         }
     })
-    // console.log(String(ceilX))
-    // console.log(String(ceilO))
 }
 
 function final(win) {
@@ -62,9 +64,11 @@ function final(win) {
     bg.classList.remove('inactive')
     retry.classList.add('active')
     retry.classList.remove('inactive')
-    retryText.innerHTML = `${win} wins`
+    h1.innerHTML = `${win} wins`
+    h2.innerHTML = `during ${counter} steps`
 }
 
-again.addEventListener('click', function() {
+again.addEventListener('click', function () {
+    again.classList.add('clicked')
     location.reload();
 })
