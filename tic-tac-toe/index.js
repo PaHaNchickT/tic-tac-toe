@@ -13,6 +13,7 @@ const combo = [
 const bg = document.querySelector('.bg')
 const retry = document.querySelector('.retry')
 const again = document.querySelector('.again')
+const retryText = document.querySelector('.retry-placeholder')
 
 area.addEventListener('click', e => {
     if (e.target.className == 'ceil free') {
@@ -46,23 +47,22 @@ function play() {
     ceilO = String(ceilO)
     combo.forEach(elem => {
         if (ceilX.includes(elem) === true) {
-            alert('X wins')
-            final()
+            final('X')
         }
         if (ceilO.includes(elem) === true) {
-            alert('O wins')
-            final()
+            final('O')
         }
     })
     // console.log(String(ceilX))
     // console.log(String(ceilO))
 }
 
-function final() {
+function final(win) {
     bg.classList.add('active')
     bg.classList.remove('inactive')
     retry.classList.add('active')
     retry.classList.remove('inactive')
+    retryText.innerHTML = `${win} wins`
 }
 
 again.addEventListener('click', function() {
