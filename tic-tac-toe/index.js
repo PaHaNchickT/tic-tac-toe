@@ -12,7 +12,8 @@ const combo = [
 ]
 
 area.addEventListener('click', e => {
-    if (e.target.className === 'ceil') {
+    if (e.target.className == 'ceil free') {
+        e.target.classList.remove('free')
         if (symbol === 0) {
             e.target.classList.remove('O')
             e.target.classList.add('X')

@@ -4,11 +4,14 @@ body {
 
 footer, header {
     background-color: #A600A6;
+    height: 60px;
 }
 
 .main {
     display: flex;
     justify-content: center;
+    background-color: #6C006C;
+    padding: 25.9px 0;
 }
 
 .game-area {
@@ -19,7 +22,6 @@ footer, header {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    background-color: #6C006C;
 }
 
 .ceil {
@@ -28,6 +30,14 @@ footer, header {
     border: 1px solid black;
     margin: 2px;
     background-color: #D25FD2;
+    border-radius: 6px;
+    box-shadow: 0px 0px 10px -5px black;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.free:hover {
+    opacity: 0.8
 }
 
 .O {
