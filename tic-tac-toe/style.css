@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+}
+
+footer, header {
+    background-color: #A600A6;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.game-area {
+    box-sizing: border-box;
+    width: 622px;
+    height: 622px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #6C006C;
+}
+
+.ceil {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    margin: 2px;
+    background-color: #D25FD2;
+}
+
+.O {
+    background-image: url(/assets/O.png);
+}
+
+.X {
+    background-image: url(/assets/X.png);
+}
+
+.O, .X {
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
