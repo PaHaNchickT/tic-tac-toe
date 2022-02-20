@@ -66,6 +66,8 @@ function final(win) {
     retry.classList.remove('inactive')
     h1.innerHTML = `${win} wins`
     h2.innerHTML = `during ${counter} steps`
+    document.querySelector('.settings').classList.add('inactive')
+    document.querySelector('.stats').classList.add('inactive')
 }
 
 again.addEventListener('click', function () {

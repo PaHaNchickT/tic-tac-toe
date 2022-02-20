@@ -14,6 +14,7 @@ footer, header {
     justify-content: center;
     background-color: #6C006C;
     padding: 25.9px 0;
+    box-shadow: inset 0px 0px 40px 1px black;
 }
 
 .game-area {
@@ -113,7 +114,67 @@ h2 {
     transition: 0.7s;
 }
 
-h1, h2 {
+h1, h2, footer {
     margin: 0;
     font-family: 'Roboto Serif', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cont {
+    display: flex;
+    flex-direction: row;
+}
+
+.settings {
+    background-image: url(/assets/settings.png);
+}
+
+.stats {
+    background-image: url(/assets/stats.png);
+}
+
+.stats, .settings {
+    background-size: 100%;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    filter: invert(1);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.settings:hover, .stats:hover, a:hover {
+    opacity: 0.6;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    padding: 0 30px;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.logo {
+    background-image: url(/assets/logo.svg);
+    background-size: 100%;
+    height: 30px;
+    width: 80px;
+    background-repeat: no-repeat;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+a:visited {
+    color:white
 }
