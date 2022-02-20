@@ -10,6 +10,9 @@ const combo = [
     '0,4,8',
     '2,4,6'
 ]
+const bg = document.querySelector('.bg')
+const retry = document.querySelector('.retry')
+const again = document.querySelector('.again')
 
 area.addEventListener('click', e => {
     if (e.target.className == 'ceil free') {
@@ -32,10 +35,10 @@ function play() {
     let ceilX = []
     let ceilO = []
     ceil.forEach((el, i) => {
-        if (el.className.slice(el.className.length-1, el.className.length) === 'X') {
+        if (el.className.slice(el.className.length - 1, el.className.length) === 'X') {
             ceilX.push(i)
         }
-        if (el.className.slice(el.className.length-1, el.className.length) === 'O') {
+        if (el.className.slice(el.className.length - 1, el.className.length) === 'O') {
             ceilO.push(i)
         }
     })
@@ -44,11 +47,24 @@ function play() {
     combo.forEach(elem => {
         if (ceilX.includes(elem) === true) {
             alert('X wins')
+            final()
         }
         if (ceilO.includes(elem) === true) {
             alert('O wins')
+            final()
         }
     })
     // console.log(String(ceilX))
     // console.log(String(ceilO))
 }
+
+function final() {
+    bg.classList.add('active')
+    bg.classList.remove('inactive')
+    retry.classList.add('active')
+    retry.classList.remove('inactive')
+}
+
+again.addEventListener('click', function() {
+    location.reload();
+})
