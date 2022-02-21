@@ -20,8 +20,10 @@ const start = document.querySelector('.go')
 input.value = ''
 let player
 let counter = 0;
-let playerList = Array(localStorage.getItem('playerList'))
-console.log(`start: ${playerList}`)
+let playerList = localStorage.getItem('playerList')
+let whoWinner
+let out = []
+console.log(out)
 
 area.addEventListener('click', e => {
     if (e.target.className == 'ceil free') {
@@ -58,22 +60,13 @@ function play() {
     combo.forEach(elem => {
         if (ceilX.includes(elem) === true) {
             final('X')
+            whoWinner = 'X'
         }
         if (ceilO.includes(elem) === true) {
             final('O')
+            whoWinner = 'O'
         }
     })
-}
-
-function final(win) {
-    bg.classList.add('active')
-    bg.classList.remove('inactive')
-    retry.classList.add('active')
-    retry.classList.remove('inactive')
-    h1.innerHTML = `${win} wins`
-    h2.innerHTML = `during ${counter} steps`
-    document.querySelector('.settings').classList.add('inactive')
-    document.querySelector('.stats').classList.add('inactive')
 }
 
 again.addEventListener('click', function () {
@@ -98,7 +91,6 @@ function startButton() {
         input.value = ''
     } else {
         player = input.value
-        input.value = ''
         bg.classList.remove('active')
         bg.classList.add('inactive')
         document.querySelector('.start').classList.add('inactive')
@@ -108,31 +100,54 @@ function startButton() {
 function setLocalStorage() {
     localStorage.setItem('player', player);
     localStorage.setItem('counter', counter);
-    localStorage.setItem('symbol', symbol);
+    localStorage.setItem('symbol', whoWinner);
 }
 window.addEventListener('beforeunload', setLocalStorage)
 
 function getLocalStorage() {
     if (localStorage.getItem('player') && localStorage.getItem('counter')) {
-        leaderBoard(localStorage.getItem('player'), localStorage.getItem('counter'), symbol)
+        leaderBoard(localStorage.getItem('player'), localStorage.getItem('counter'), localStorage.getItem('symbol'))
     }
 }
 window.addEventListener('load', getLocalStorage)
 
-function leaderBoard(player, counter, symbol) {
-    if (playerList[0] == null) {
+function leaderBoard(player, counter, winner) {
+    if (playerList === null) {
         playerList = []
     }
     if (player !== undefined && counter != 0) {
         playerList.unshift(player)
-        if (symbol === 0) {
-            playerList.unshift('X')
-        }
-        if (symbol === 1) {
-            playerList.unshift('O')
-        }
+        playerList.unshift(winner)
         playerList.unshift(counter)
         localStorage.setItem('playerList', playerList);
     }
-    console.log(`end: ${playerList}`)
+}
+
+function leaderTable() {
+    if (playerList !== null) {
+        playerList = playerList.split(',')
+        let temp = []
+        playerList.forEach((e, i) => {
+            temp.push(e)
+            if (i !== 0 && (i + 1) % 3 === 0) {
+                out.push(temp)
+                temp = []
+            }
+        })
+        if (out.length > 10) {
+            out = out.slice(0, 10)
+        }
+    }
+}
+leaderTable();
+
+function final(win) {
+    bg.classList.add('active')
+    bg.classList.remove('inactive')
+    retry.classList.add('active')
+    retry.classList.remove('inactive')
+    h1.innerHTML = `${win} wins`
+    h2.innerHTML = `during ${counter} steps`
+    document.querySelector('.settings').classList.add('inactive')
+    document.querySelector('.stats').classList.add('inactive')
 }
