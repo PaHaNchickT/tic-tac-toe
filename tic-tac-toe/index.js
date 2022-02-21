@@ -82,6 +82,17 @@ again.addEventListener('click', function () {
 })
 
 start.addEventListener('click', function () {
+    startButton()
+})
+
+input.addEventListener('keydown', function (event) {
+    if (event.code === 'Enter') {
+        input.blur()
+        startButton()
+    }
+})
+
+function startButton() {
     if (input.value === '' || input.value.includes(',')) {
         input.classList.add('input-error')
         input.value = ''
@@ -92,7 +103,7 @@ start.addEventListener('click', function () {
         bg.classList.add('inactive')
         document.querySelector('.start').classList.add('inactive')
     }
-})
+}
 
 function setLocalStorage() {
     localStorage.setItem('player', player);
@@ -113,14 +124,14 @@ function leaderBoard(player, counter, symbol) {
         playerList = []
     }
     if (player !== undefined && counter != 0) {
-        playerList.push(player)
+        playerList.unshift(player)
         if (symbol === 0) {
-            playerList.push('X')
+            playerList.unshift('X')
         }
         if (symbol === 1) {
-            playerList.push('O')
+            playerList.unshift('O')
         }
-        playerList.push(counter)
+        playerList.unshift(counter)
         localStorage.setItem('playerList', playerList);
     }
     console.log(`end: ${playerList}`)
