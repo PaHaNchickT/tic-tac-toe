@@ -22,8 +22,11 @@ let player
 let counter = 0;
 let playerList = localStorage.getItem('playerList')
 let whoWinner
-let out = []
-console.log(out)
+let out
+
+let LSplayer = localStorage.getItem('player')
+let LSwinner = localStorage.getItem('winner')
+let LScounter = localStorage.getItem('counter')
 
 area.addEventListener('click', e => {
     if (e.target.className == 'ceil free') {
@@ -69,9 +72,20 @@ function play() {
     })
 }
 
+function final(win) {
+    bg.classList.add('active')
+    bg.classList.remove('inactive')
+    retry.classList.add('active')
+    retry.classList.remove('inactive')
+    h1.innerHTML = `${win} wins`
+    h2.innerHTML = `during ${counter} steps`
+    document.querySelector('.settings').classList.add('inactive')
+    document.querySelector('.stats').classList.add('inactive')
+}
+
 again.addEventListener('click', function () {
     again.classList.add('clicked')
-    location.reload();
+    document.location.reload()
 })
 
 start.addEventListener('click', function () {
@@ -115,17 +129,21 @@ function leaderBoard(player, counter, winner) {
     if (playerList === null) {
         playerList = []
     }
+    if (typeof playerList == typeof 'jopa') {
+        playerList = playerList.split(',')
+    }
     if (player !== undefined && counter != 0) {
         playerList.unshift(player)
         playerList.unshift(winner)
         playerList.unshift(counter)
         localStorage.setItem('playerList', playerList);
     }
-}
 
-function leaderTable() {
-    if (playerList !== null) {
-        playerList = playerList.split(',')
+    if (out == undefined) {
+        out = []
+    }
+
+    if (playerList !== null && playerList.length > 0) {
         let temp = []
         playerList.forEach((e, i) => {
             temp.push(e)
@@ -134,20 +152,9 @@ function leaderTable() {
                 temp = []
             }
         })
-        if (out.length > 10) {
-            out = out.slice(0, 10)
-        }
+        // if (out.length > 10) {
+        //     out = out.slice(0, 10)
+        // }
     }
-}
-leaderTable();
-
-function final(win) {
-    bg.classList.add('active')
-    bg.classList.remove('inactive')
-    retry.classList.add('active')
-    retry.classList.remove('inactive')
-    h1.innerHTML = `${win} wins`
-    h2.innerHTML = `during ${counter} steps`
-    document.querySelector('.settings').classList.add('inactive')
-    document.querySelector('.stats').classList.add('inactive')
+    console.log(out)
 }
