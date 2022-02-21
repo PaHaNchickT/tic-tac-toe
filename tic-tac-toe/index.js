@@ -156,5 +156,9 @@ function leaderBoard(player, counter, winner) {
         //     out = out.slice(0, 10)
         // }
     }
+    out = out.slice(0,10)
+    out = out.sort(function(a,b) {
+        return a[0] - b[0]
+    })
     console.log(out)
 }
