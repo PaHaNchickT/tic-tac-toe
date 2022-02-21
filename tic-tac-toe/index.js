@@ -32,6 +32,7 @@ let counter = 0;
 let playerList = localStorage.getItem('playerList')
 let whoWinner
 let out
+let empty
 let theme = localStorage.getItem('theme')
 if (theme === null) {
     theme = 1;
@@ -168,17 +169,17 @@ function leaderBoard(player, counter, winner) {
     out = out.sort(function (a, b) {
         return a[0] - b[0]
     })
+    out = out.filter(e => {
+        return e[1] !== 'undefined'
+    })
+    console.log(out)
     out.forEach((el, ind) => {
-        console.log(el)
         document.querySelectorAll('.lditm').forEach((e, i) => {
             if (ind === i) {
-                // e.innerHTML = `${ind+1}st. ${el[2]} won with ${el[1]} during ${el[0]} steps`
                 e.innerHTML = `${ind+1}st. ${el[2]} (${el[1]}, ${el[0]} steps)`
             }
         })
     })
-    let temp = document.querySelectorAll('.lditm')
-    console.log(temp)
 }
 
 stats.addEventListener('click', function () {
