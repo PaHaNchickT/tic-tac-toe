@@ -32,9 +32,14 @@ let counter = 0;
 let playerList = localStorage.getItem('playerList')
 let whoWinner
 let out
+let theme = localStorage.getItem('theme')
+if (theme === null) {
+    theme = 1;
+}
+changeColor(theme)
 
 area.addEventListener('click', e => {
-    if (e.target.className == 'ceil free') {
+    if (e.target.className == `ceil free color${theme}-1`) {
         e.target.classList.remove('free')
         if (symbol === 0) {
             e.target.classList.remove('O')
@@ -120,6 +125,7 @@ function setLocalStorage() {
     localStorage.setItem('player', player);
     localStorage.setItem('counter', counter);
     localStorage.setItem('symbol', whoWinner);
+    localStorage.setItem('theme', theme);
 }
 window.addEventListener('beforeunload', setLocalStorage)
 
@@ -158,14 +164,14 @@ function leaderBoard(player, counter, winner) {
             }
         })
     }
-    out = out.slice(0,10)
-    out = out.sort(function(a,b) {
+    out = out.slice(0, 10)
+    out = out.sort(function (a, b) {
         return a[0] - b[0]
     })
     console.log(out)
 }
 
-stats.addEventListener('click', function() {
+stats.addEventListener('click', function () {
     home()
     statsWindow.classList.remove('inactive')
     statsWindow.classList.add('active')
@@ -173,7 +179,7 @@ stats.addEventListener('click', function() {
     settingsWindow.classList.remove('active')
 })
 
-settings.addEventListener('click', function() {
+settings.addEventListener('click', function () {
     home()
     settingsWindow.classList.remove('inactive')
     settingsWindow.classList.add('active')
@@ -188,7 +194,7 @@ function home() {
     back.classList.add('active')
 }
 
-back.addEventListener('click', function() {
+back.addEventListener('click', function () {
     statsWindow.classList.remove('active')
     settingsWindow.classList.remove('active')
     settingsWindow.classList.add('inactive')
@@ -197,4 +203,41 @@ back.addEventListener('click', function() {
     document.querySelector('.start').classList.remove('inactive')
     back.classList.add('inactive')
     back.classList.remove('active')
+})
+
+function changeColor(num) {
+    cleanThemes()
+    document.querySelector('header').classList.add(`color${num}-2`)
+    document.querySelector('.main').classList.add(`color${num}-3`)
+    document.querySelectorAll('.ceil').forEach(e => {
+        e.classList.add(`color${num}-1`)
+    })
+    document.querySelector('footer').classList.add(`color${num}-2`)
+}
+
+function cleanThemes() {
+    [1, 2, 3].forEach(num => {
+        document.querySelector('header').classList.remove(`color${num}-2`)
+        document.querySelector('.main').classList.remove(`color${num}-3`)
+        document.querySelectorAll('.ceil').forEach(e => {
+            e.classList.remove(`color${num}-1`)
+        })
+        document.querySelector('footer').classList.remove(`color${num}-2`)
+    })
+
+}
+
+document.querySelector('.theme1').addEventListener('click', function () {
+    theme = 1;
+    changeColor(theme)
+})
+
+document.querySelector('.theme2').addEventListener('click', function () {
+    theme = 2;
+    changeColor(theme)
+})
+
+document.querySelector('.theme3').addEventListener('click', function () {
+    theme = 3;
+    changeColor(theme)
 })
