@@ -1,14 +1,14 @@
 const area = document.querySelector('.game-area');
 let symbol = 0;
 const combo = [
-    [0,1,2],
-    [0,3,6],
-    [0,4,8],
-    [1,4,7],
-    [2,4,6],
-    [2,5,8],
-    [3,4,5],
-    [6,7,8],
+    [0, 1, 2],
+    [0, 3, 6],
+    [0, 4, 8],
+    [1, 4, 7],
+    [2, 4, 6],
+    [2, 5, 8],
+    [3, 4, 5],
+    [6, 7, 8],
 ]
 const bg = document.querySelector('.bg')
 const retry = document.querySelector('.retry')
@@ -90,18 +90,29 @@ function play() {
 
     ceilX = String(ceilX)
     ceilO = String(ceilO)
-    
 
+    console.log(ceilO)
     combo.forEach(elem => {
-        if (ceilX.includes(elem) === true || indX === 4) {
+        if (ceilX.includes(elem) === true) {
             final('X')
             whoWinner = 'X'
+            if (indX === 4 && indX.length == 7) {
+                final('X')
+                whoWinner = 'X'
+            }
         }
-        if (ceilO.includes(elem) === true || indO === 3) {
+        if (ceilO.includes(elem) === true) {
             final('O')
             whoWinner = 'O'
+            if (indO === 3 && indO.length == 7) {
+                final('O')
+                whoWinner = 'O'
+            }
         }
     })
+    if (counter === 9 && whoWinner === undefined) {
+        final('Nobody')
+    }
 }
 
 function final(win) {
@@ -196,7 +207,7 @@ function leaderBoard(player, counter, winner) {
     out.forEach((el, ind) => {
         document.querySelectorAll('.lditm').forEach((e, i) => {
             if (ind === i) {
-                e.innerHTML = `${ind+1}st. ${el[2]} (${el[1]}, ${el[0]} steps)`
+                e.innerHTML = `${ind + 1}st. ${el[2]} (${el[1]}, ${el[0]} steps)`
             }
         })
     })
