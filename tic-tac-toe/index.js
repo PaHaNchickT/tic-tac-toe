@@ -13,9 +13,15 @@ const combo = [
 const bg = document.querySelector('.bg')
 const retry = document.querySelector('.retry')
 const again = document.querySelector('.again')
-const h1 = document.querySelector('h1')
+const h1 = document.querySelector('.h1')
 const h2 = document.querySelector('h2')
+const input = document.querySelector('input')
+const start = document.querySelector('.go')
+input.value = ''
+let player
 let counter = 0;
+let playerList = Array(localStorage.getItem('playerList'))
+console.log(`start: ${playerList}`)
 
 area.addEventListener('click', e => {
     if (e.target.className == 'ceil free') {
@@ -74,3 +80,48 @@ again.addEventListener('click', function () {
     again.classList.add('clicked')
     location.reload();
 })
+
+start.addEventListener('click', function () {
+    if (input.value === '' || input.value.includes(',')) {
+        input.classList.add('input-error')
+        input.value = ''
+    } else {
+        player = input.value
+        input.value = ''
+        bg.classList.remove('active')
+        bg.classList.add('inactive')
+        document.querySelector('.start').classList.add('inactive')
+    }
+})
+
+function setLocalStorage() {
+    localStorage.setItem('player', player);
+    localStorage.setItem('counter', counter);
+    localStorage.setItem('symbol', symbol);
+}
+window.addEventListener('beforeunload', setLocalStorage)
+
+function getLocalStorage() {
+    if (localStorage.getItem('player') && localStorage.getItem('counter')) {
+        leaderBoard(localStorage.getItem('player'), localStorage.getItem('counter'), symbol)
+    }
+}
+window.addEventListener('load', getLocalStorage)
+
+function leaderBoard(player, counter, symbol) {
+    if (playerList[0] == null) {
+        playerList = []
+    }
+    if (player !== undefined && counter != 0) {
+        playerList.push(player)
+        if (symbol === 0) {
+            playerList.push('X')
+        }
+        if (symbol === 1) {
+            playerList.push('O')
+        }
+        playerList.push(counter)
+        localStorage.setItem('playerList', playerList);
+    }
+    console.log(`end: ${playerList}`)
+}

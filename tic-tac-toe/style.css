@@ -39,7 +39,7 @@ footer, header {
     transition: 0.1s;
 }
 
-.free:hover {
+.free:hover, .again:hover {
     opacity: 0.8;
 }
 
@@ -73,13 +73,13 @@ footer, header {
     display: none;
 }
 
-.retry {
+.retry, .start {
     background-color: white;
     position: absolute;
     width: 450px;
     height: 250px;
     z-index: 10;
-    left: 35%;
+    left: 34.6%;
     top: 34%;
 }
 
@@ -103,10 +103,7 @@ h2 {
     width: 50px;
     height: 50px;
     margin: auto;
-}
-
-.again:hover {
-    opacity: 0.8;
+    transition: 0.7s;
 }
 
 .clicked {
@@ -148,7 +145,7 @@ header {
     transition: 0.5s;
 }
 
-.settings:hover, .stats:hover, a:hover {
+.settings:hover, .stats:hover, a:hover, .go:hover {
     opacity: 0.6;
 }
 
@@ -177,4 +174,24 @@ a {
 
 a:visited {
     color:white
+}
+
+input {
+    margin: 15px 0 20px 122px;
+    width: 200px;
+}
+
+.go {
+    background-image: url(/assets/start.png);
+    background-size: 100%;
+    cursor: pointer;
+    width: 120px;
+    height: 63px;
+    margin: auto;
+    transition: 0.4s;
+}
+
+.input-error {
+    border: 2px solid red;
+    border-radius: 3px;
 }
