@@ -73,7 +73,7 @@ footer, header {
     display: none;
 }
 
-.retry, .start {
+.retry, .start, .settings-window {
     background-color: white;
     position: absolute;
     width: 450px;
@@ -81,6 +81,16 @@ footer, header {
     z-index: 10;
     left: 34.6%;
     top: 34%;
+}
+
+.stats-window {
+    background-color: white;
+    position: absolute;
+    width: 450px;
+    height: 550px;
+    z-index: 10;
+    left: 34.6%;
+    top: 15%;
 }
 
 h1 {
@@ -145,7 +155,7 @@ header {
     transition: 0.5s;
 }
 
-.settings:hover, .stats:hover, a:hover, .go:hover {
+.settings:hover, .stats:hover, a:hover, .go:hover, .back:hover {
     opacity: 0.6;
 }
 
@@ -194,4 +204,19 @@ input {
 .input-error {
     border: 2px solid red;
     border-radius: 3px;
+}
+
+.back {
+    background-image: url(/assets/back.png);
+    width: 50px;
+    height: 50px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    filter: invert(1);
+    z-index: 15;
+    top: 80px;
+    left: 20px;
+    cursor: pointer;
+    transition: 0.6s;
 }

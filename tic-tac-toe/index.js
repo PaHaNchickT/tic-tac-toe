@@ -17,16 +17,21 @@ const h1 = document.querySelector('.h1')
 const h2 = document.querySelector('h2')
 const input = document.querySelector('input')
 const start = document.querySelector('.go')
+const stats = document.querySelector('.stats')
+const settings = document.querySelector('.settings')
+const settingsWindow = document.querySelector('.settings-window')
+const statsWindow = document.querySelector('.stats-window')
+const back = document.querySelector('.back')
+settingsWindow.classList.add('inactive')
+statsWindow.classList.add('inactive')
+back.classList.add('inactive')
+
 input.value = ''
 let player
 let counter = 0;
 let playerList = localStorage.getItem('playerList')
 let whoWinner
 let out
-
-let LSplayer = localStorage.getItem('player')
-let LSwinner = localStorage.getItem('winner')
-let LScounter = localStorage.getItem('counter')
 
 area.addEventListener('click', e => {
     if (e.target.className == 'ceil free') {
@@ -152,9 +157,6 @@ function leaderBoard(player, counter, winner) {
                 temp = []
             }
         })
-        // if (out.length > 10) {
-        //     out = out.slice(0, 10)
-        // }
     }
     out = out.slice(0,10)
     out = out.sort(function(a,b) {
@@ -162,3 +164,37 @@ function leaderBoard(player, counter, winner) {
     })
     console.log(out)
 }
+
+stats.addEventListener('click', function() {
+    home()
+    statsWindow.classList.remove('inactive')
+    statsWindow.classList.add('active')
+    settingsWindow.classList.add('inactive')
+    settingsWindow.classList.remove('active')
+})
+
+settings.addEventListener('click', function() {
+    home()
+    settingsWindow.classList.remove('inactive')
+    settingsWindow.classList.add('active')
+    statsWindow.classList.add('inactive')
+    statsWindow.classList.remove('active')
+})
+
+function home() {
+    document.querySelector('.start').classList.remove('active')
+    document.querySelector('.start').classList.add('inactive')
+    back.classList.remove('inactive')
+    back.classList.add('active')
+}
+
+back.addEventListener('click', function() {
+    statsWindow.classList.remove('active')
+    settingsWindow.classList.remove('active')
+    settingsWindow.classList.add('inactive')
+    statsWindow.classList.add('inactive')
+    document.querySelector('.start').classList.add('active')
+    document.querySelector('.start').classList.remove('inactive')
+    back.classList.add('inactive')
+    back.classList.remove('active')
+})
